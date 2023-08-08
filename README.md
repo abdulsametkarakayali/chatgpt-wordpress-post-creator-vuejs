@@ -3,11 +3,8 @@
 ## Env setup
 VUE_APP_OPENAI_API_KEY=xxxxxxxx
 ```
-```
 VUE_APP_WORDPRESS_URL=xxxxxxxx
-```
 VUE_APP_WORDPRESS_USERNAME=xxxxx
-```
 VUE_APP_WORDPRESS_PASSWORD=xxxxxxxxx
 
 
