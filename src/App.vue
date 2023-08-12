@@ -1,29 +1,5 @@
 <template>
-  
   <div class="container mt-5">
-
-
-    <div class="config-form">
-    <h2>API ve WordPress Ayarları</h2>
-    <div>
-      <label for="openai-api-key">OpenAI API Key:</label>
-      <input v-model="openaiApiKey" class="form-control" type="text" id="openai-api-key">
-    </div>
-    <div>
-      <label for="wordpress-url">WordPress URL:</label>
-      <input v-model="wordpressUrl" class="form-control" type="text" id="wordpress-url">
-    </div>
-    <div>
-      <label for="wordpress-username">WordPress Kullanıcı Adı:</label>
-      <input v-model="wordpressUsername" class="form-control" type="text" id="wordpress-username">
-    </div>
-    <div>
-      <label for="wordpress-password">WordPress Şifre:</label>
-      <input v-model="wordpressPassword" class="form-control" type="password" id="wordpress-password">
-    </div>
-  </div>
-
-
     <div v-if="icerikOlusturuldu" class="alert alert-success" role="alert">
         Başarılı!
       </div>
@@ -58,10 +34,6 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      openaiApiKey:'',
-      wordpressUrl:'',
-      wordpressUsername:'',
-      wordpressPassword:'',
       icerikOlusturuldu: false,
       konuBasligi: '',
       islemBasladi: false,
@@ -73,7 +45,7 @@ export default {
         async icerikOlustur() {
           this.loading = true; 
           this.islemBasladi = true;
-          //const apiKey = process.env.VUE_APP_OPENAI_API_KEY;
+          const apiKey = process.env.VUE_APP_OPENAI_API_KEY;
           console.log(process.env.VUE_APP_OPENAI_API_KEY)
           try {
             const response = await axios.post(
@@ -86,7 +58,7 @@ export default {
             {
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.openaiApiKey}`,
+                'Authorization': `Bearer ${apiKey}`,
               },
             }
           );
@@ -105,9 +77,9 @@ export default {
       this.loading = true; 
       this.islemBasladi = true;
       this.icerikOlusturuldu = false;
-      const wordpressUrl = this.wordpressUrl;
-      const username = this.wordpressUsername;
-      const password = this.wordpressPassword;
+      const wordpressUrl = process.env.VUE_APP_WORDPRESS_URL;
+      const username = process.env.VUE_APP_WORDPRESS_USERNAME;
+      const password = process.env.VUE_APP_WORDPRESS_PASSWORD;
 
 
         const auth = 'Basic ' + btoa(username + ':' + password);
